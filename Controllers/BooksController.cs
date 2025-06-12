@@ -17,7 +17,8 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Book>> FindOne(int id) {
+    public async Task<ActionResult<Book>> FindOne(int id)
+    {
         Book? book = await _context.Books.FindAsync(id);
 
         if (book == null)
@@ -38,5 +39,33 @@ public class BooksController : ControllerBase
         _context.Books.Add(book);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(FindOne), new { id = book.Id }, book);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, Book updatedBook)
+    {
+        Book? book = await _context.Books.FindAsync(id);
+        if (book == null)
+            return NotFound();
+
+        updatedBook.Id = id;
+        _context.Entry(book).CurrentValues.SetValues(updatedBook);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Remove(int id)
+    {
+        Book? book = await _context.Books.FindAsync(id);
+
+        if (book == null)
+            return NotFound();
+
+        _context.Books.Remove(book);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 }
