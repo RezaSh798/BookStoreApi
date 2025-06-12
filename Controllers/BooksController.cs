@@ -16,6 +16,16 @@ public class BooksController : ControllerBase
         _context = context;
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Book>> FindOne(int id) {
+        Book? book = await _context.Books.FindAsync(id);
+
+        if (book == null)
+            return NotFound();
+
+        return book;
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> FindMany()
     {
@@ -27,6 +37,6 @@ public class BooksController : ControllerBase
     {
         _context.Books.Add(book);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(FindMany), new { id = book.Id }, book);
+        return CreatedAtAction(nameof(FindOne), new { id = book.Id }, book);
     }
 }
