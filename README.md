@@ -7,3 +7,6 @@ Use following command:
 `dotnet run`
 Or
 `dotnet watch`.
+
+### Swagger
+http://localhost:3000/swagger/index.html
