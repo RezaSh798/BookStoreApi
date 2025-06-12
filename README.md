@@ -2,7 +2,7 @@
 A simple CRUD .net core project.
 
 ### Install dependencies
-`dotnet restore
+`dotnet restore`
 
 ### How to run
 Use following command:
