@@ -1,6 +1,9 @@
 # Book Store Api
 A simple CRUD .net core project.
 
+### Install dependencies
+`dotnet restore
+
 ### How to run
 Use following command:
 
